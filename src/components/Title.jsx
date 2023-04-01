@@ -1,8 +1,9 @@
 import React from 'react'
-import '../styles/utilities/title.scss'
-const Title = () => {
+import '../styles/utilities/Title.scss'
+
+const Title = ({children}) => {
   return (
-    <h1 className="title">Todo List</h1>
+    <h1 className="title">{ children }</h1>
   )
 }
 
