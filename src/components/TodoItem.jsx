@@ -8,10 +8,12 @@ import { useDispatch } from 'react-redux'
 import {deleteTodo} from '../slices/todoSlice'
 import {updateTodo} from '../slices/todoSlice'
 import TodoModal from './TodoModel'
+import CheckButton from './CheckButton'
 
 const TodoItem = ({ todo }) => {
   const dispatch = useDispatch();
   const [updateModelOpen, setUpdateModelOpen] = useState(false)
+  const [checked, setChecked] = useState(false)
     
     const handleUpdate = () => {
         setUpdateModelOpen(true)
@@ -23,12 +25,20 @@ const TodoItem = ({ todo }) => {
         toast.success("Todo Deleted Succefully")
 
     }
+  
+  const handleCheck = () => {
+    setChecked(!checked)
+    dispatch(updateTodo({
+      ...todo,
+      status: checked ? 'incomplete' : 'complete'
+      }))
+    }
 
   return (
     <>
       <div className="item">
         <div className="todoDetails">
-          []
+          <CheckButton checked={checked} handleCheck={handleCheck} />
           <div className="text">
             <p
               className={getClasses([
