@@ -24,6 +24,10 @@ const TodoModal = ({ modelOpen, setModelOpen }) => {
         time: new Date().toLocaleString(),
 
       }));
+      toast.success("Task Added Successfully");
+    }
+    else {
+      toast.error("Title Shouldn't be Empty");
     }
   }
 
