@@ -1,3 +1,4 @@
+import MainContent from "./components/MainContent"
 import Title from "./components/Title"
 import TodoHeader from "./components/TodoHeader"
 
@@ -11,7 +12,8 @@ function App() {
       <Title>Todo List</Title>
 
       <div className="app__wrapper">
-      <TodoHeader />
+        <TodoHeader />
+        <MainContent />
       </div>
 
 
