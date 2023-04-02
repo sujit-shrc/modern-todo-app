@@ -39,7 +39,7 @@ const TodoItem = ({ todo }) => {
       <div className="item">
         <div className="todoDetails">
           <CheckButton checked={checked} handleCheck={handleCheck} />
-          <div className="text">
+          <div className="texts">
             <p
               className={getClasses([
                 "todoText",
