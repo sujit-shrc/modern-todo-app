@@ -1,33 +1,60 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/utilities/TodoModel.scss';
 import { MdOutlineClose } from 'react-icons/md';
 import Button from './Button';
 import { useDispatch } from 'react-redux';
-import { addTodo } from '../slices/todoSlice';
+import { addTodo, updateTodo } from '../slices/todoSlice';
 import {v4 as uuid} from 'uuid';
 import toast from 'react-hot-toast';
 
-const TodoModal = ({ modelOpen, setModelOpen }) => {
+const TodoModal = ({ type, modelOpen, setModelOpen, todo }) => {
 
   const [title, setTitle] = useState("")
   const [status, setStatus] = useState("incomplete")
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (type == 'update' && todo) {
+      setTitle(todo.title)
+      setStatus(todo.status)
+    } else {
+      setTitle('')
+      setStatus('incomplete')
+    }
+  }, [type, todo, modelOpen])
 
   const handleSubmit = (e)=> {
     e.preventDefault();
-    if (title && status) {
-      dispatch(addTodo({
-        id: uuid(),
-        title,
-        status,
-        time: new Date().toLocaleString(),
-
-      }));
-      toast.success("Task Added Successfully");
+    if (title === '') {
+      toast.error("Title is Required")
+      return;
     }
-    else {
-      toast.error("Title Shouldn't be Empty");
+    if (title && status) {
+      if (type === 'add') {
+        dispatch(
+          addTodo({
+            id: uuid(),
+            title,
+            status,
+            time: new Date().toLocaleString(),
+          })
+        );
+        toast.success("Task Added Successfully");
+      }
+      if (type === 'update') {
+        if (todo.title !== title || todo.status !== status) {
+          dispatch(
+            updateTodo(
+              { ...todo, title, status }
+            )
+          )
+          toast.success("Todo Updated Successfully")
+        }
+        else {
+          toast.error("No Changes Detected")
+        }
+      }
+      setModelOpen(false);
     }
   }
 
@@ -47,7 +74,7 @@ const TodoModal = ({ modelOpen, setModelOpen }) => {
           <form className="form"
             onSubmit={(e)=>{handleSubmit(e)}}
           >
-            <h1 className="formTitle">Add Task</h1>
+            <h1 className="formTitle">{type === 'update' ? "Update" : "Add"} Task</h1>
             <label htmlFor="title">
               Title
               <input
@@ -77,7 +104,7 @@ const TodoModal = ({ modelOpen, setModelOpen }) => {
 
             <div className="buttonContainer">
               <Button type="submit" variant="primary">
-                Add Task
+                {type === 'update' ? "Update" : "Add"} Task
               </Button>
 
               <Button

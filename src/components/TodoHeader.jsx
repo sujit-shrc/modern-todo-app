@@ -4,7 +4,7 @@ import '../styles/utilities/App.scss'
 import TodoModel from './TodoModel'
 
 const TodoHeader = () => {
-  const [modelOpen, setModelOpen] = useState(true)
+  const [modelOpen, setModelOpen] = useState(false)
   return (
       <div className='todo-header'>
       <Button variant='primary'
@@ -18,7 +18,7 @@ const TodoHeader = () => {
           <option value="incomplete">Incomplete</option>
           <option value="complete">Complete</option>
         </SelectButton>
-        <TodoModel modelOpen={modelOpen} setModelOpen={setModelOpen} />
+        <TodoModel type="add" modelOpen={modelOpen} setModelOpen={setModelOpen} />
       
     </div>
   )
