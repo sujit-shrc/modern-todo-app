@@ -9,6 +9,17 @@ import {deleteTodo} from '../slices/todoSlice'
 import {updateTodo} from '../slices/todoSlice'
 import TodoModal from './TodoModel'
 import CheckButton from './CheckButton'
+import { motion } from 'framer-motion'
+
+
+const child = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
+
 
 const TodoItem = ({ todo }) => {
   const dispatch = useDispatch();
@@ -36,7 +47,7 @@ const TodoItem = ({ todo }) => {
 
   return (
     <>
-      <div className="item">
+      <motion.div className="item" variants={child} >
         <div className="todoDetails">
           <CheckButton checked={checked} handleCheck={handleCheck} />
           <div className="texts">
@@ -73,7 +84,7 @@ const TodoItem = ({ todo }) => {
             <MdDelete />
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <TodoModal
         type="update"
