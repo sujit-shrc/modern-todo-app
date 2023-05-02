@@ -4,3 +4,5 @@ Here a user can create Todo with their status(Complete, In-Progress, Incomplete)
 ## Todo App UI
 ![Todo Home](src/assets/todo-app.png)
 
+## Add Filter UI
+![Todo Filter](src/assets/todo-filter.png)
