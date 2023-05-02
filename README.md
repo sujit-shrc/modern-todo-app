@@ -6,3 +6,6 @@ Here a user can create Todo with their status(Complete, In-Progress, Incomplete)
 
 ## Add Filter UI
 ![Todo Filter](src/assets/todo-filter.png)
+
+## When Todo Bucket is Empty
+![Todo Empty](src/assets/todo-empty.png)
