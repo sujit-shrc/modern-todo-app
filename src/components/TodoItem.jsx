@@ -44,7 +44,6 @@ const TodoItem = ({ todo }) => {
       status: checked ? 'incomplete' : 'complete'
       }))
     }
-
   return (
     <>
       <motion.div className="item" variants={child} >
@@ -60,7 +59,7 @@ const TodoItem = ({ todo }) => {
               {todo.title}
             </p>
             <p className="time">
-              {format(new Date(todo.time), "p, MM/dd/yyyy")}
+              {todo.time}
             </p>
           </div>
         </div>
